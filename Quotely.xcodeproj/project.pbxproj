@@ -7,19 +7,27 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		154B11FF2CE233BC00664736 /* QuoteView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 154B11FE2CE233BC00664736 /* QuoteView.swift */; };
+		154B12012CE24A6600664736 /* CategoryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 154B12002CE24A6600664736 /* CategoryView.swift */; };
+		154B12042CE24EAC00664736 /* AppNavigation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 154B12032CE24EAC00664736 /* AppNavigation.swift */; };
+		154B12062CE24F3900664736 /* AuthorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 154B12052CE24F3900664736 /* AuthorView.swift */; };
+		154B12082CE24F8F00664736 /* InspirationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 154B12072CE24F8F00664736 /* InspirationView.swift */; };
 		4EBFFE822CC243D600474B90 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4EBFFE7C2CC243D600474B90 /* Preview Assets.xcassets */; };
 		4EBFFE832CC243D600474B90 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4EBFFE7E2CC243D600474B90 /* Assets.xcassets */; };
 		4EBFFE852CC243D600474B90 /* QuotelyApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4EBFFE802CC243D600474B90 /* QuotelyApp.swift */; };
-		CE3FA6482CD8CB5800671DFC /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE3FA6472CD8CB5500671DFC /* ContentView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		154B11FE2CE233BC00664736 /* QuoteView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuoteView.swift; sourceTree = "<group>"; };
+		154B12002CE24A6600664736 /* CategoryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryView.swift; sourceTree = "<group>"; };
+		154B12032CE24EAC00664736 /* AppNavigation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppNavigation.swift; sourceTree = "<group>"; };
+		154B12052CE24F3900664736 /* AuthorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthorView.swift; sourceTree = "<group>"; };
+		154B12072CE24F8F00664736 /* InspirationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InspirationView.swift; sourceTree = "<group>"; };
 		4EBFFE622CC243B400474B90 /* Quotely.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Quotely.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		4EBFFE7C2CC243D600474B90 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		4EBFFE7E2CC243D600474B90 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		4EBFFE802CC243D600474B90 /* QuotelyApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuotelyApp.swift; sourceTree = "<group>"; };
 		4EBFFE982CC24CA700474B90 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
-		CE3FA6472CD8CB5500671DFC /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -33,6 +41,26 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		154B11FD2CE2338200664736 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				154B12022CE24E9500664736 /* AppNavigation */,
+				154B11FE2CE233BC00664736 /* QuoteView.swift */,
+				154B12002CE24A6600664736 /* CategoryView.swift */,
+				154B12052CE24F3900664736 /* AuthorView.swift */,
+				154B12072CE24F8F00664736 /* InspirationView.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		154B12022CE24E9500664736 /* AppNavigation */ = {
+			isa = PBXGroup;
+			children = (
+				154B12032CE24EAC00664736 /* AppNavigation.swift */,
+			);
+			path = AppNavigation;
+			sourceTree = "<group>";
+		};
 		4EBFFE592CC243B400474B90 = {
 			isa = PBXGroup;
 			children = (
@@ -60,10 +88,10 @@
 		4EBFFE812CC243D600474B90 /* Quotely */ = {
 			isa = PBXGroup;
 			children = (
+				154B11FD2CE2338200664736 /* Views */,
 				4EBFFE982CC24CA700474B90 /* Info.plist */,
 				4EBFFE7E2CC243D600474B90 /* Assets.xcassets */,
 				4EBFFE802CC243D600474B90 /* QuotelyApp.swift */,
-				CE3FA6472CD8CB5500671DFC /* ContentView.swift */,
 				4EBFFE7D2CC243D600474B90 /* Preview Content */,
 			);
 			path = Quotely;
@@ -142,8 +170,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				CE3FA6482CD8CB5800671DFC /* ContentView.swift in Sources */,
+				154B12062CE24F3900664736 /* AuthorView.swift in Sources */,
 				4EBFFE852CC243D600474B90 /* QuotelyApp.swift in Sources */,
+				154B11FF2CE233BC00664736 /* QuoteView.swift in Sources */,
+				154B12012CE24A6600664736 /* CategoryView.swift in Sources */,
+				154B12042CE24EAC00664736 /* AppNavigation.swift in Sources */,
+				154B12082CE24F8F00664736 /* InspirationView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -299,7 +331,7 @@
 				SUPPORTS_XR_DESIGNED_FOR_IPHONE_IPAD = NO;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
 		};
@@ -333,7 +365,7 @@
 				SUPPORTS_XR_DESIGNED_FOR_IPHONE_IPAD = NO;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;
 		};
