@@ -8,33 +8,32 @@
 import SwiftUI
 
 struct QuoteView: View {
+    
+    @State var quote: Quote? = dummyQuotes.randomElement()
+    
     var body: some View {
         VStack {
             
-            VStack {
-                HStack {
+            HStack {
+                
+                Text("Category: \(quote?.category ?? "Unknown")")
+                    .font(.headline)
+                    .foregroundStyle(.black)
 
-                    Text ("Category: Music")
-                        .font(.headline)
-
-                    
-                    Image (systemName: "line.horizontal.3.decrease.circle")
-                        .padding(.trailing)
-                        .font(.headline.bold())
-                        
-                }
-                .frame(maxWidth: .infinity)
-                .tint(.yellow)
-                .background(.yellow)
+                Image (systemName: "line.horizontal.3.decrease.circle")
+                    .foregroundStyle(.black)
+                    .font(.headline.bold())
             }
-        
+            .frame(maxWidth: .infinity)
             
-           
+            .buttonStyle(.borderedProminent)
+            .tint(.yellow)
+            
             
             Spacer()
             
             VStack {
-                Text ("Qulte asdf  asdf;kj askl; kjasdf k;j kl;asdfkj k;jasdfklj kjasdf ljk;lasdf kj ;kasdf jk;jlasdf kjl;lkasdf ljl;jasdf kjlk;asdf kjlkl;jasdf jk")
+                Text (quote?.text ?? "No Qoute Available")
                     .font(.title2.bold())
                 
                 Divider()
@@ -42,7 +41,7 @@ struct QuoteView: View {
                 HStack {
                     Spacer()
                     
-                    Text("Author: John Coltrane")
+                    Text(quote?.author ?? "Unknown")
                         .font(.caption)
                         .foregroundStyle(.gray)
                         .padding(.top, 5)
@@ -61,7 +60,7 @@ struct QuoteView: View {
             Spacer()
             
             Button (action: {
-                
+                    self.randomQuote()
             }) {
                 HStack {
 
@@ -84,8 +83,12 @@ struct QuoteView: View {
             .tint(.yellow)
         }
     }
+    
+    private func randomQuote()  {
+        self.quote = dummyQuotes.randomElement()
+    }
 }
 
 #Preview {
-    QuoteView()
+    QuoteView(quote: dummyQuotes.randomElement())
 }

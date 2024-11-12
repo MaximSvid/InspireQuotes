@@ -12,6 +12,7 @@
 		154B12042CE24EAC00664736 /* AppNavigation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 154B12032CE24EAC00664736 /* AppNavigation.swift */; };
 		154B12062CE24F3900664736 /* AuthorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 154B12052CE24F3900664736 /* AuthorView.swift */; };
 		154B12082CE24F8F00664736 /* InspirationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 154B12072CE24F8F00664736 /* InspirationView.swift */; };
+		154B12332CE3679F00664736 /* CategoryDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 154B12322CE3679F00664736 /* CategoryDetailView.swift */; };
 		4EBFFE822CC243D600474B90 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4EBFFE7C2CC243D600474B90 /* Preview Assets.xcassets */; };
 		4EBFFE832CC243D600474B90 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4EBFFE7E2CC243D600474B90 /* Assets.xcassets */; };
 		4EBFFE852CC243D600474B90 /* QuotelyApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4EBFFE802CC243D600474B90 /* QuotelyApp.swift */; };
@@ -23,12 +24,21 @@
 		154B12032CE24EAC00664736 /* AppNavigation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppNavigation.swift; sourceTree = "<group>"; };
 		154B12052CE24F3900664736 /* AuthorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthorView.swift; sourceTree = "<group>"; };
 		154B12072CE24F8F00664736 /* InspirationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InspirationView.swift; sourceTree = "<group>"; };
+		154B12322CE3679F00664736 /* CategoryDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryDetailView.swift; sourceTree = "<group>"; };
 		4EBFFE622CC243B400474B90 /* Quotely.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Quotely.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		4EBFFE7C2CC243D600474B90 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		4EBFFE7E2CC243D600474B90 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		4EBFFE802CC243D600474B90 /* QuotelyApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuotelyApp.swift; sourceTree = "<group>"; };
 		4EBFFE982CC24CA700474B90 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 /* End PBXFileReference section */
+
+/* Begin PBXFileSystemSynchronizedRootGroup section */
+		154B122B2CE358FA00664736 /* Model */ = {
+			isa = PBXFileSystemSynchronizedRootGroup;
+			path = Model;
+			sourceTree = "<group>";
+		};
+/* End PBXFileSystemSynchronizedRootGroup section */
 
 /* Begin PBXFrameworksBuildPhase section */
 		4EBFFE5F2CC243B400474B90 /* Frameworks */ = {
@@ -49,6 +59,7 @@
 				154B12002CE24A6600664736 /* CategoryView.swift */,
 				154B12052CE24F3900664736 /* AuthorView.swift */,
 				154B12072CE24F8F00664736 /* InspirationView.swift */,
+				154B12322CE3679F00664736 /* CategoryDetailView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -88,6 +99,7 @@
 		4EBFFE812CC243D600474B90 /* Quotely */ = {
 			isa = PBXGroup;
 			children = (
+				154B122B2CE358FA00664736 /* Model */,
 				154B11FD2CE2338200664736 /* Views */,
 				4EBFFE982CC24CA700474B90 /* Info.plist */,
 				4EBFFE7E2CC243D600474B90 /* Assets.xcassets */,
@@ -111,6 +123,9 @@
 			buildRules = (
 			);
 			dependencies = (
+			);
+			fileSystemSynchronizedGroups = (
+				154B122B2CE358FA00664736 /* Model */,
 			);
 			name = Quotely;
 			packageProductDependencies = (
@@ -176,6 +191,7 @@
 				154B12012CE24A6600664736 /* CategoryView.swift in Sources */,
 				154B12042CE24EAC00664736 /* AppNavigation.swift in Sources */,
 				154B12082CE24F8F00664736 /* InspirationView.swift in Sources */,
+				154B12332CE3679F00664736 /* CategoryDetailView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -27,7 +27,6 @@ struct AppNavigation: View {
             }
         }
         .tint(.yellow)
-//        .background(.yellow)
     }
 }
 

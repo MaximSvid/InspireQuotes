@@ -9,14 +9,15 @@ import SwiftUI
 
 struct CategoryView: View {
     
-    let categories = ["motivation", "life", "love", "wisdom", "success", "happiness", "courage", "firendship", "education", "future"]
-    
+    @State private var quoteCategories: [String] = []
+        
     let columns = [GridItem(.flexible()), GridItem(.flexible())]
     
     var body: some View {
         ScrollView {
+            
             LazyVGrid(columns: columns) {
-                ForEach(categories, id: \.self) { category in
+                ForEach(quoteCategories, id: \.self) { category in
                     Text(category)
                 }
                 .frame(maxWidth: .infinity, maxHeight: 150)
@@ -27,7 +28,15 @@ struct CategoryView: View {
                 .shadow(color: Color.gray, radius: 10, x: 0, y: 0)
                 .padding()
             }
+            .onAppear{
+                loadCategories()
+            }
         }
+    }
+    private func loadCategories() {
+        let uniqueCategories = Set(dummyQuotes.map{ $0.category})
+        quoteCategories = Array(uniqueCategories)
+        
     }
 }
 
