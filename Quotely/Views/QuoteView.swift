@@ -14,22 +14,26 @@ struct QuoteView: View {
     var body: some View {
         VStack {
             
-            HStack {
-                
+            ZStack {
                 Text("Category: \(quote?.category ?? "Unknown")")
                     .font(.headline)
                     .foregroundStyle(.black)
 
-                Image (systemName: "line.horizontal.3.decrease.circle")
-                    .foregroundStyle(.black)
-                    .font(.headline.bold())
+                HStack {
+                    Spacer()
+                    
+                    Image (systemName: "line.horizontal.3.decrease.circle")
+                        .foregroundStyle(.yellow)
+                        .font(.headline.bold())
+//                        .frame(alignment: .trailing)
+                        .padding(.trailing)
+                }
             }
             .frame(maxWidth: .infinity)
-            
+
             .buttonStyle(.borderedProminent)
             .tint(.yellow)
-            
-            
+                  
             Spacer()
             
             VStack {

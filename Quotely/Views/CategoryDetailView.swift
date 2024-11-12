@@ -8,13 +8,20 @@
 import SwiftUI
 
 struct CategoryDetailView: View {
+    
+
+    var category: String
+    
     var body: some View {
         VStack {
-            Text("CategoryDetailView")
+            Text(category)
+                .font(.title)
         }
     }
+    
 }
 
 #Preview {
-    CategoryDetailView()
+    CategoryDetailView(category: "")
 }
+    

@@ -14,24 +14,31 @@ struct CategoryView: View {
     let columns = [GridItem(.flexible()), GridItem(.flexible())]
     
     var body: some View {
+        NavigationStack {
         ScrollView {
-            
-            LazyVGrid(columns: columns) {
-                ForEach(quoteCategories, id: \.self) { category in
-                    Text(category)
+                LazyVGrid(columns: columns) {
+                    ForEach(quoteCategories, id: \.self) { category in
+                        NavigationLink(destination: CategoryDetailView(category: category)) {
+                            Text(category)
+                                .foregroundStyle(.black)
+                        }
+                        
+                    }
+                    .frame(maxWidth: .infinity, maxHeight: 150)
+                    .padding()
+                    .font(.headline)
+                    .background(Color.white)
+                    .clipShape(.buttonBorder)
+                    .shadow(color: Color.gray, radius: 10, x: 0, y: 0)
+                    .padding()
                 }
-                .frame(maxWidth: .infinity, maxHeight: 150)
-                .padding()
-                .font(.headline)
-                .background(Color.white)
-                .clipShape(.buttonBorder)
-                .shadow(color: Color.gray, radius: 10, x: 0, y: 0)
-                .padding()
+                .onAppear{
+                    loadCategories()
+                }
             }
-            .onAppear{
-                loadCategories()
-            }
+            
         }
+        .navigationTitle("Categories")
     }
     private func loadCategories() {
         let uniqueCategories = Set(dummyQuotes.map{ $0.category})
