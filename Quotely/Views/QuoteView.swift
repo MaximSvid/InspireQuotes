@@ -9,7 +9,7 @@ import SwiftUI
 
 struct QuoteView: View {
     
-    @State var quote: Quote? = dummyQuotes.randomElement()
+    @State var quote: Quote? = nil
     
     var body: some View {
         VStack {
@@ -18,22 +18,21 @@ struct QuoteView: View {
                 Text("Category: \(quote?.category ?? "Unknown")")
                     .font(.headline)
                     .foregroundStyle(.black)
-
+                
                 HStack {
                     Spacer()
                     
                     Image (systemName: "line.horizontal.3.decrease.circle")
                         .foregroundStyle(.yellow)
                         .font(.headline.bold())
-//                        .frame(alignment: .trailing)
                         .padding(.trailing)
                 }
             }
             .frame(maxWidth: .infinity)
-
+            
             .buttonStyle(.borderedProminent)
             .tint(.yellow)
-                  
+            
             Spacer()
             
             VStack {
@@ -64,10 +63,10 @@ struct QuoteView: View {
             Spacer()
             
             Button (action: {
-                    self.randomQuote()
+                fetchQuote()
             }) {
                 HStack {
-
+                    
                     Image (systemName: "arrow.clockwise")
                         .foregroundStyle(.black)
                         .font(.headline.bold())
@@ -79,20 +78,51 @@ struct QuoteView: View {
                 }
                 .frame(maxWidth: .infinity)
                 
-                    
+                
             }
             
             .padding()
             .buttonStyle(.borderedProminent)
             .tint(.yellow)
         }
+        .onAppear{
+            fetchQuote()
+        }
     }
     
-    private func randomQuote()  {
-        self.quote = dummyQuotes.randomElement()
+    private func getQuoteFromAPI() async throws -> Quote {
+        
+        let urlString = "https://api.syntax-institut.de/quotes"
+        
+        guard let url = URL(string: urlString) else {
+            throw HTTPError.invalidURL
+        }
+        
+        let (data, _) = try await URLSession.shared.data(from: url)
+        
+        let result = try JSONDecoder().decode([Quote].self, from: data)
+        
+        guard let firstQuote = result.first else {
+            throw HTTPError.invalidURL
+        }
+        
+        return firstQuote
+
     }
+    
+    private func fetchQuote() {
+        Task {
+            do {
+                let quote = try await getQuoteFromAPI()
+                self.quote = quote
+            } catch {
+                print(error)
+            }
+        }
+    }
+    
 }
 
 #Preview {
-    QuoteView(quote: dummyQuotes.randomElement())
+    QuoteView()
 }
