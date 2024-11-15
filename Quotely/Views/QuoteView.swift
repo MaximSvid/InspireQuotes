@@ -9,6 +9,8 @@ import SwiftUI
 
 struct QuoteView: View {
     
+    @State private var animateGragient: Bool = false
+    
     @State var quote: Quote? = nil
     
     var body: some View {
@@ -23,7 +25,7 @@ struct QuoteView: View {
                     Spacer()
                     
                     Image (systemName: "line.horizontal.3.decrease.circle")
-                        .foregroundStyle(.yellow)
+                        .foregroundStyle(.black)
                         .font(.headline.bold())
                         .padding(.trailing)
                 }
@@ -38,6 +40,7 @@ struct QuoteView: View {
             VStack {
                 Text (quote?.text ?? "No Qoute Available")
                     .font(.title2.bold())
+                
                 
                 Divider()
                 
@@ -54,11 +57,13 @@ struct QuoteView: View {
             }
             .frame(maxWidth: .infinity)
             .padding()
+//            .animatedGradientBackground()
             .background(.white)
             .clipShape(.buttonBorder)
             .shadow(color: .gray, radius: 10, x: 0, y: 0)
             .padding(.leading)
             .padding(.trailing)
+            
             
             Spacer()
             
@@ -76,18 +81,21 @@ struct QuoteView: View {
                         .foregroundStyle(.black)
                     
                 }
-                .frame(maxWidth: .infinity)
+                .frame(maxWidth: 250)
                 
                 
             }
-            
             .padding()
-            .buttonStyle(.borderedProminent)
+            .background(RoundedRectangle(cornerRadius: 20)
+                .fill(.yellow))
+//            .buttonStyle(.borderedProminent)
             .tint(.yellow)
         }
         .onAppear{
             fetchQuote()
         }
+        .animatedGradientBackground()
+
     }
     
     private func getQuoteFromAPI() async throws -> Quote {

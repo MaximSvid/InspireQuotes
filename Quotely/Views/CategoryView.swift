@@ -13,7 +13,7 @@ struct CategoryView: View {
     @State private var quoteCategories: [String] = []
     @State private var categoryQuotes: [String: [Quote]] = [:]
     @State private var selectedLanguage: String = "English"
-    @State private var isPickerShown: Bool = false
+    
     
     
     
@@ -22,41 +22,21 @@ struct CategoryView: View {
     
     var body: some View {
         NavigationStack {
-            ZStack {
+            VStack {
                 Text("Categories")
                     .font(.title.bold())
                     .padding(.bottom)
                 
-                HStack {
-                    Spacer()
+                
                     
-                    Button(action: {
-                        isPickerShown.toggle()
-                    }) {
-                        Image(systemName: "plus")
+                    Picker ("Language", selection: $selectedLanguage) {
+                        Text("English").tag("English")
+                        Text("Deutsch").tag("Deutsch")
                     }
-                    .sheet(isPresented: $isPickerShown) {
-                        Text("Enter a language")
-                            .font(.title.bold())
-                            .padding()
-                        
-                        Picker ("Language", selection: $selectedLanguage) {
-                            Text("English").tag("English")
-                            Text("Deutsch").tag("Deutsch")
-                        }
-                        .pickerStyle(.segmented)
-                        .padding()
-                        
-                        Button(action: {
-                            isPickerShown.toggle()
-                        }) {
-                            Text ("Save")
-                                .font(.title.bold())
-                                .buttonStyle(PlainButtonStyle())
-                        }
-                    }
+                    .pickerStyle(.segmented)
+                    .padding()
                 }
-            }
+            
             
             ScrollView {
                 LazyVGrid(columns: columns) {
@@ -74,7 +54,7 @@ struct CategoryView: View {
                         }
                         
                     }
-                    .frame(maxWidth: .infinity, maxHeight: 150)
+                    .frame(maxWidth: .infinity, maxHeight: 130)
                     .padding()
                     .font(.headline)
                     .background(Color.white)
@@ -99,6 +79,7 @@ struct CategoryView: View {
             }
             return category.capitalizingFirstLetter()
         }
+    
     
     private func getQuoteCategoryFromAPI() async throws -> [String] {
         
