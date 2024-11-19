@@ -15,22 +15,40 @@ struct AuthorView: View {
         
         NavigationStack {
             VStack {
-                
                 Text("Authors")
                     .font(.title.bold())
                     .padding(.bottom)
                 
-                List(authors, id: \.id) { author in
-                    NavigationLink (destination: AuthorDetailView(author: author)) {
-                        Text(author.name)
-                            .font(.headline)
-                    }
+                ZStack {
+                    Color.clear
+                        .animatedGradientBackground()
+                        .ignoresSafeArea()
                     
-                }
-                .onAppear {
-                    fetchAuthor()
+                    
+                    ScrollView {
+                        LazyVStack(spacing: 10) {
+                            ForEach(authors, id: \.id) { author in
+                                NavigationLink(destination: AuthorDetailView(author: author)) {
+                                    Text(author.name)
+                                        .font(.headline)
+                                        .frame(maxWidth: .infinity)
+                                        .padding()
+                                        .background(Color.white.opacity(0.7))
+                                        .foregroundStyle(.black)
+                                        .cornerRadius(10)
+                                        .shadow(color: .black.opacity(0.2), radius: 5, x: 0, y: 3)
+                                }
+                                .padding(.horizontal)
+                            }
+                        }
+                        .padding(.vertical)
+                    }
                 }
             }
+            .onAppear {
+                fetchAuthor()
+            }
+            .animatedGradientBackground()
         }
     }
     

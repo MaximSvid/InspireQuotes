@@ -18,10 +18,27 @@ struct AuthorDetailView: View {
                 .font(.title.bold())
                 .padding(.bottom)
             
-            List(quotes, id: \.id) { quote in
-                Text(quote.text)
+            
+            ScrollView {
+                LazyVStack(spacing: 10) {
+                    ForEach(quotes, id: \.id) { quote in
+                        Text(quote.text)
+                            
+                    }
+                    .frame(maxWidth: .infinity, alignment: .leading)
+                    .padding()
+                    .background(Color.white.opacity(0.7))
+                    .cornerRadius(15)
+                    .shadow(color: Color.gray, radius: 10, x: 0, y: 0)
+                    .padding(.horizontal)
+                    
+                }
+                
             }
+            .animatedGradientBackground()
+           
         }
+        .animatedGradientBackground()
         .onAppear {
             fetchQuotesByAuthor()
         }

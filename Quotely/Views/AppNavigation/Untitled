@@ -1,0 +1,313 @@
+diff --git a/Quotely.xcodeproj/project.pbxproj b/Quotely.xcodeproj/project.pbxproj
+index 613c348..450b9ff 100644
+--- a/Quotely.xcodeproj/project.pbxproj
++++ b/Quotely.xcodeproj/project.pbxproj
+@@ -13,6 +13,7 @@
+ 		154B12062CE24F3900664736 /* AuthorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 154B12052CE24F3900664736 /* AuthorView.swift */; };
+ 		154B12082CE24F8F00664736 /* InspirationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 154B12072CE24F8F00664736 /* InspirationView.swift */; };
+ 		154B12332CE3679F00664736 /* CategoryDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 154B12322CE3679F00664736 /* CategoryDetailView.swift */; };
++		157E2A732CE7A75600F80601 /* CustomTabBar .swift in Sources */ = {isa = PBXBuildFile; fileRef = 157E2A722CE7A75500F80601 /* CustomTabBar .swift */; };
+ 		15E76CE62CE6207200A2B7F2 /* AuthorDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15E76CE52CE6207200A2B7F2 /* AuthorDetailView.swift */; };
+ 		4EBFFE822CC243D600474B90 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4EBFFE7C2CC243D600474B90 /* Preview Assets.xcassets */; };
+ 		4EBFFE832CC243D600474B90 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4EBFFE7E2CC243D600474B90 /* Assets.xcassets */; };
+@@ -26,6 +27,7 @@
+ 		154B12052CE24F3900664736 /* AuthorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthorView.swift; sourceTree = "<group>"; };
+ 		154B12072CE24F8F00664736 /* InspirationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InspirationView.swift; sourceTree = "<group>"; };
+ 		154B12322CE3679F00664736 /* CategoryDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryDetailView.swift; sourceTree = "<group>"; };
++		157E2A722CE7A75500F80601 /* CustomTabBar .swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CustomTabBar .swift"; sourceTree = "<group>"; };
+ 		15E76CE52CE6207200A2B7F2 /* AuthorDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthorDetailView.swift; sourceTree = "<group>"; };
+ 		4EBFFE622CC243B400474B90 /* Quotely.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Quotely.app; sourceTree = BUILT_PRODUCTS_DIR; };
+ 		4EBFFE7C2CC243D600474B90 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
+@@ -63,6 +65,7 @@
+ 				154B12072CE24F8F00664736 /* InspirationView.swift */,
+ 				154B12322CE3679F00664736 /* CategoryDetailView.swift */,
+ 				15E76CE52CE6207200A2B7F2 /* AuthorDetailView.swift */,
++				157E2A722CE7A75500F80601 /* CustomTabBar .swift */,
+ 			);
+ 			path = Views;
+ 			sourceTree = "<group>";
+@@ -192,6 +195,7 @@
+ 				4EBFFE852CC243D600474B90 /* QuotelyApp.swift in Sources */,
+ 				154B11FF2CE233BC00664736 /* QuoteView.swift in Sources */,
+ 				154B12012CE24A6600664736 /* CategoryView.swift in Sources */,
++				157E2A732CE7A75600F80601 /* CustomTabBar .swift in Sources */,
+ 				154B12042CE24EAC00664736 /* AppNavigation.swift in Sources */,
+ 				154B12082CE24F8F00664736 /* InspirationView.swift in Sources */,
+ 				15E76CE62CE6207200A2B7F2 /* AuthorDetailView.swift in Sources */,
+diff --git a/Quotely/CustomTabBar.swift b/Quotely/CustomTabBar.swift
+new file mode 100644
+index 0000000..a32803f
+--- /dev/null
++++ b/Quotely/CustomTabBar.swift
+@@ -0,0 +1,65 @@
++//
++//  CustomTabBar.swift
++//  Quotely
++//
++//  Created by Maxim Svidrak on 15.11.24.
++//
++
++import SwiftUI
++
++struct CustomTabBar: View {
++    var activeForegroundColor: Color = .white
++    var activeBackgroundColor: Color = .blue
++    @Binding var activeTab: TabModel
++    
++    //geometry effect
++    @Namespace private var animation
++    var body: some View {
++        HStack(spacing: 0) {
++            ForEach(TabModel.allCases, id: \.rawValue) { tab in
++                Button{
++                    activeTab = tab
++                } label: {
++                    HStack(spacing: 10) {
++                        Image(systemName: tab.rawValue)
++                            .font(.title)
++                        
++                        if activeTab == tab {
++                            Text (tab.title)
++                                .font(.caption)
++                                .fontWeight(.semibold)
++                                .lineLimit(1)
++                        }
++                    }
++                    .foregroundStyle(activeTab == tab ? activeForegroundColor : .black.opacity(0.8))
++                    .padding(.vertical, 2)
++                    .padding(.leading, 10)
++                    .padding(.trailing, 15)
++                    .contentShape(.rect)
++                    .background {
++                        if activeTab == tab {
++                            Capsule()
++                                .fill(activeBackgroundColor.gradient)
++                                .matchedGeometryEffect(id: "ActiveTab", in: animation)
++                        }
++                    }
++                }
++                .buttonStyle(.plain)
++            }
++        }
++        .padding(.horizontal, 5)
++        .frame(height: 50)
++        .background(
++            Color.white.opacity(0.7)
++                .shadow(.drop(color: .black.opacity(0.08), radius: 5, x: 5, y: 5))
++                .shadow(.drop(color: .black.opacity(0.06), radius: 5, x: -5, y: -5)),
++            in: .capsule
++        )
++        
++        .animation(.smooth(duration: 0.3, extraBounce: 0), value: activeTab)
++    }
++}
++
++#Preview {
++    AppNavigation()
++}
+diff --git a/Quotely/Views/AppNavigation/AppNavigation.swift b/Quotely/Views/AppNavigation/AppNavigation.swift
+index 5ff6fea..d801b99 100644
+--- a/Quotely/Views/AppNavigation/AppNavigation.swift
++++ b/Quotely/Views/AppNavigation/AppNavigation.swift
+@@ -8,28 +8,116 @@
+ import SwiftUI
+ 
+ struct AppNavigation: View {
++    @State private var activeTab: TabModel = .home
++    @State private var isTabBarHidden: Bool = false
+     var body: some View {
+-        TabView {
+-            Tab("Quote", systemImage: "quote.bubble") {
+-                QuoteView()
++        ZStack(alignment: .bottom) {
++            Group {
++                if #available(iOS 18, *) {
++                    TabView (selection: $activeTab) {
++                        Tab.init(value: .home) {
++                            QuoteView()
++                                .toolbarVisibility(.hidden, for: .tabBar)
++                        }
++                        Tab.init(value: .author) {
++                            AuthorView()
++                                .toolbarVisibility(.hidden, for: .tabBar)
++                        }
++                        Tab.init(value: .category) {
++                            CategoryView()
++                                .toolbarVisibility(.hidden, for: .tabBar)
++                        }
++                        Tab.init(value: .inspiration) {
++                            InspirationView()
++                                .toolbarVisibility(.hidden, for: .tabBar)
++                        }
++                    }
++                } else {
++                    TabView(selection: $activeTab) {
++                        Text("Quote")
++                            .tag(TabModel.home)
++                            .background() {
++                                if !isTabBarHidden {
++                                    HideTabBar{
++                                        print("Hidden")
++                                        isTabBarHidden = true
++                                    }
++                                }
++                            }
++                        
++                        Text("Author")
++                            .tag(TabModel.author)
++                            
++                        
++                        Text("Category")
++                            .tag(TabModel.category)
++                            
++                        
++                        Text("Inspiration")
++                            .tag(TabModel.inspiration)
++                            
++                    }
++                }
+             }
+             
+-            Tab("Author", systemImage: "person.2") {
+-                AuthorView()
+-            }
+-            
+-            Tab("Category", systemImage:  "square.grid.2x2") {
+-                CategoryView()
+-            }
+-            
+-            Tab ("Inspiration", systemImage: "lightbulb") {
+-                InspirationView()
++            CustomTabBar(activeTab: $activeTab)
++
++        }
++        
++    }
++}
++
++struct HideTabBar: UIViewRepresentable {
++    var result: () -> ()
++    func makeUIView(context: Context) -> UIView {
++        let view = UIView(frame: .zero)
++        view.backgroundColor = .clear
++        
++        DispatchQueue.main.async {
++            if let tabController = view.tabController {
++                tabController.tabBar.isHidden = true
++                result()
+             }
+         }
+-        .tint(.yellow)
++        
++        return view
++    }
++    
++    func updateUIView(_ uiView: UIView, context: Context) {
++        
++    }
++}
++
++extension UIView {
++    var tabController: UITabBarController? {
++        if let controller = sequence(first: self, next: {
++            $0.next
++        }).first(where: { $0 is UITabBarController }) as? UITabBarController {
++            return controller
++        }
++        return nil
+     }
+ }
+ 
+ #Preview {
+     AppNavigation()
+ }
++//
++//TabView {
++//    Tab("Quote", systemImage: "quote.bubble") {
++//        QuoteView()
++//    }
++//    
++//    Tab("Author", systemImage: "person.2") {
++//        AuthorView()
++//    }
++//    
++//    Tab("Category", systemImage:  "square.grid.2x2") {
++//        CategoryView()
++//    }
++//    
++//    Tab ("Inspiration", systemImage: "lightbulb") {
++//        InspirationView()
++//    }
++//}
++//.tint(.yellow)
+diff --git a/Quotely/Views/CustomTabBar .swift b/Quotely/Views/CustomTabBar .swift
+new file mode 100644
+index 0000000..a32803f
+--- /dev/null
++++ b/Quotely/Views/CustomTabBar .swift	
+@@ -0,0 +1,65 @@
++//
++//  CustomTabBar.swift
++//  Quotely
++//
++//  Created by Maxim Svidrak on 15.11.24.
++//
++
++import SwiftUI
++
++struct CustomTabBar: View {
++    var activeForegroundColor: Color = .white
++    var activeBackgroundColor: Color = .blue
++    @Binding var activeTab: TabModel
++    
++    //geometry effect
++    @Namespace private var animation
++    var body: some View {
++        HStack(spacing: 0) {
++            ForEach(TabModel.allCases, id: \.rawValue) { tab in
++                Button{
++                    activeTab = tab
++                } label: {
++                    HStack(spacing: 10) {
++                        Image(systemName: tab.rawValue)
++                            .font(.title)
++                        
++                        if activeTab == tab {
++                            Text (tab.title)
++                                .font(.caption)
++                                .fontWeight(.semibold)
++                                .lineLimit(1)
++                        }
++                    }
++                    .foregroundStyle(activeTab == tab ? activeForegroundColor : .black.opacity(0.8))
++                    .padding(.vertical, 2)
++                    .padding(.leading, 10)
++                    .padding(.trailing, 15)
++                    .contentShape(.rect)
++                    .background {
++                        if activeTab == tab {
++                            Capsule()
++                                .fill(activeBackgroundColor.gradient)
++                                .matchedGeometryEffect(id: "ActiveTab", in: animation)
++                        }
++                    }
++                }
++                .buttonStyle(.plain)
++            }
++        }
++        .padding(.horizontal, 5)
++        .frame(height: 50)
++        .background(
++            Color.white.opacity(0.7)
++                .shadow(.drop(color: .black.opacity(0.08), radius: 5, x: 5, y: 5))
++                .shadow(.drop(color: .black.opacity(0.06), radius: 5, x: -5, y: -5)),
++            in: .capsule
++        )
++        
++        .animation(.smooth(duration: 0.3, extraBounce: 0), value: activeTab)
++    }
++}
++
++#Preview {
++    AppNavigation()
++}

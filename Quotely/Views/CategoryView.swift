@@ -32,43 +32,53 @@ struct CategoryView: View {
                     Picker ("Language", selection: $selectedLanguage) {
                         Text("English").tag("English")
                         Text("Deutsch").tag("Deutsch")
+                            .background(.white.opacity(0.7))
+                        
                     }
                     .pickerStyle(.segmented)
                     .padding()
-                }
-            
-            
-            ScrollView {
-                LazyVGrid(columns: columns) {
-                    ForEach(quoteCategories, id: \.self) { category in
-                        NavigationLink(destination: CategoryDetailView(
-                            category: category,
-                            quotes: categoryQuotes[category] ?? []
-                        )) {
-                            Text(displayCategoryName(for: category))
-                                .foregroundStyle(.black)
+                    
+                
+                ScrollView {
+                    LazyVGrid(columns: columns) {
+                        ForEach(quoteCategories, id: \.self) { category in
+                            NavigationLink(destination: CategoryDetailView(
+                                category: category,
+                                quotes: categoryQuotes[category] ?? []
+                            )) {
+                                Text(displayCategoryName(for: category))
+                                    .foregroundStyle(.black)
+                            }
+                            .frame(height: 80)
+                            .onAppear {
+                                loadQuotes(category: category)
+                            }
+                            
                         }
-                        .frame(height: 80)
-                        .onAppear {
-                            loadQuotes(category: category)
-                        }
-                        
+                        .frame(maxWidth: .infinity, maxHeight: 130)
+                        .padding()
+                        .font(.headline)
+                        .background(Color.white.opacity(0.7))
+                        .clipShape(.buttonBorder)
+                        .shadow(color: Color.gray, radius: 10, x: 0, y: 0)
+                        .padding()
                     }
-                    .frame(maxWidth: .infinity, maxHeight: 130)
-                    .padding()
-                    .font(.headline)
-                    .background(Color.white)
-                    .clipShape(.buttonBorder)
-                    .shadow(color: Color.gray, radius: 10, x: 0, y: 0)
-                    .padding()
+                  
+                    .onAppear{
+                        fetchCategories()
+                    }
                 }
-                .onAppear{
-                    fetchCategories()
+                .animatedGradientBackground()
+                
                 }
-            }
+                .animatedGradientBackground()
+            
+            
+            
             
         }
-        .navigationTitle("Categories")
+        
+        
     }
     
     //для языка

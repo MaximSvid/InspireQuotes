@@ -17,18 +17,10 @@ struct QuoteView: View {
         VStack {
             
             ZStack {
-                Text("Category: \(quote?.category ?? "Unknown")")
-                    .font(.headline)
-                    .foregroundStyle(.black)
+                Text("Category: \(quote?.category.capitalizingFirstLetter() ?? "Unknown")")
+                    .font(.title.bold())
+                    .padding(.bottom)
                 
-                HStack {
-                    Spacer()
-                    
-                    Image (systemName: "line.horizontal.3.decrease.circle")
-                        .foregroundStyle(.black)
-                        .font(.headline.bold())
-                        .padding(.trailing)
-                }
             }
             .frame(maxWidth: .infinity)
             
@@ -58,7 +50,7 @@ struct QuoteView: View {
             .frame(maxWidth: .infinity)
             .padding()
 //            .animatedGradientBackground()
-            .background(.white)
+            .background(.white.opacity(0.7))
             .clipShape(.buttonBorder)
             .shadow(color: .gray, radius: 10, x: 0, y: 0)
             .padding(.leading)
@@ -84,12 +76,14 @@ struct QuoteView: View {
                 .frame(maxWidth: 250)
                 
                 
+                
             }
             .padding()
             .background(RoundedRectangle(cornerRadius: 20)
                 .fill(.yellow))
 //            .buttonStyle(.borderedProminent)
             .tint(.yellow)
+            .padding(.bottom, 70)
         }
         .onAppear{
             fetchQuote()

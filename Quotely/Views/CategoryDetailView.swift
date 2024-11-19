@@ -13,33 +13,38 @@ struct CategoryDetailView: View {
     
     var body: some View {
         VStack {
-            Text("Category: \(category.capitalizingFirstLetter())")
-                .font(.title.bold())
-                .padding(.bottom)
-            
-            List (quotes, id: \.id){quote in
-                VStack(alignment: .leading) {
-                    Text(quote.text)
-                        .font(.headline)
-                    HStack {
-                        Spacer()
-                        Text(quote.author)
-                            .font(.subheadline)
-                            .foregroundStyle(.gray)
+                Text("Category: \(category.capitalizingFirstLetter())")
+                    .font(.title.bold())
+                    .padding(.bottom)
+
+                ScrollView {
+                    LazyVStack(spacing: 10) {
+                        ForEach(quotes, id: \.id) { quote in
+                            VStack(alignment: .leading) {
+                                Text(quote.text)
+                                    .font(.headline)
+                                Divider()
+                                HStack {
+                                    Spacer()
+                                    Text(quote.author)
+                                        .font(.subheadline)
+                                        .foregroundStyle(.black.opacity(0.8))
+                                }
+                            }
+                            .padding()
+                            .background(Color.white.opacity(0.7))
+                            .cornerRadius(15)
+                            .shadow(color: Color.gray, radius: 10, x: 0, y: 0)
+                            .padding(.horizontal)
+                        }
                     }
-                    
+                    .padding(.vertical)
                 }
-                .padding(.vertical, 5)
+                .animatedGradientBackground()
             }
-            
-        }
+            .animatedGradientBackground()
     }
-    
-//    extension String {
-//        func capitalizingFirstLetter() -> String {
-//            return prefix(1).capitalized + dropFirst()
-//        }
-//    }
+
     
 }
 

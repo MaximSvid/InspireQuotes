@@ -16,44 +16,57 @@ struct InspirationView: View {
     
     
     var body: some View {
-        ScrollView {
-            LazyVGrid(columns: columns) {
-                ForEach(inspirationImage, id: \.id) { image in
-                    GeometryReader { geometry in
-                        if let url = URL(string: image.urls.regular) {
-                            AsyncImage(url: url) { phase in
-                                switch phase {
-                                case .empty:
-                                    ProgressView()
-                                        .frame(width: geometry.size.width, height: geometry.size.height)
-                                case .success(let image):
-                                    image
-                                        .resizable()
-                                        .scaledToFill()
-                                        .frame(width: geometry.size.width, height: geometry.size.height)
-                                        .clipShape(RoundedRectangle(cornerRadius: 10))
-                                case .failure:
-                                    Image(systemName: "photo")
-                                        .resizable()
-                                        .scaledToFit()
-                                        .frame(width: geometry.size.width, height: geometry.size.height)
-                                        .foregroundColor(.gray)
-                                @unknown default:
-                                    EmptyView()
+        
+        VStack() {
+            
+            Text("Inspiration")
+                .font(.title.bold())
+                .padding(.bottom)
+            
+            ScrollView {
+                
+                
+                
+                LazyVGrid(columns: columns) {
+                    ForEach(inspirationImage, id: \.id) { image in
+                        GeometryReader { geometry in
+                            if let url = URL(string: image.urls.regular) {
+                                AsyncImage(url: url) { phase in
+                                    switch phase {
+                                    case .empty:
+                                        ProgressView()
+                                            .frame(width: geometry.size.width, height: geometry.size.height)
+                                    case .success(let image):
+                                        image
+                                            .resizable()
+                                            .scaledToFill()
+                                            .frame(width: geometry.size.width, height: geometry.size.height)
+                                            .clipShape(RoundedRectangle(cornerRadius: 10))
+                                    case .failure:
+                                        Image(systemName: "photo")
+                                            .resizable()
+                                            .scaledToFit()
+                                            .frame(width: geometry.size.width, height: geometry.size.height)
+                                            .foregroundColor(.gray)
+                                    @unknown default:
+                                        EmptyView()
+                                    }
                                 }
+                            } else {
+                                Image(systemName: "photo")
+                                    .resizable()
+                                    .scaledToFit()
+                                    .frame(width: geometry.size.width, height: geometry.size.height)
+                                    .foregroundColor(.gray)
                             }
-                        } else {
-                            Image(systemName: "photo")
-                                .resizable()
-                                .scaledToFit()
-                                .frame(width: geometry.size.width, height: geometry.size.height)
-                                .foregroundColor(.gray)
                         }
+                        .aspectRatio(1, contentMode: .fill)
                     }
-                    .aspectRatio(1, contentMode: .fill)
                 }
             }
         }
+        .animatedGradientBackground()
+        
         .onAppear {
             fetchInspirationImage()
         }
